@@ -3,6 +3,7 @@ package com.servicesuite.flexibill;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.content.SharedPreferences;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
@@ -13,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView enter;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +28,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, LoginActivity.class);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+        Intent intent;
+        if (isLoggedIn) {
+            intent = new Intent(this, HomeActivity.class);
+        } else {
+            intent = new Intent(this, LoginActivity.class);
+        }
         startActivity(intent);
     }
 

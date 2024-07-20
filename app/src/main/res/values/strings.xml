@@ -2,4 +2,7 @@
     <string name="app_name">FlexiBill</string>
     <string name="flexibill_logo">FlexiBill Logo</string>
     <string name="enter_button">Enter button</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
 </resources>
