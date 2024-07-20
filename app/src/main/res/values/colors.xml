@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#8B4513</color> <!-- SaddleBrown -->
+    <color name="colorPrimaryDark">#5C3317</color> <!-- Darker Brown -->
+    <color name="colorAccent">#D2B48C</color> <!-- Tan -->
+    <color name="backgroundColor">#3E2723</color> <!-- Dark Chocolate -->
+    <color name="homeBackgroundColor">#4E342E</color> <!-- Chocolate -->
+    <color name="cardBackgroundColor">#795548</color> <!-- Brown -->
+    <color name="cardTextColor">#FFCCBC</color> <!-- Piggy Bank -->
 </resources>

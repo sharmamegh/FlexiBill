@@ -1,9 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.FlexiBill" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary and secondary colors -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/cardTextColor</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorSecondaryVariant">@color/colorAccent</item>
+        <item name="colorOnSecondary">@color/cardTextColor</item>
+        <item name="android:statusBarColor" >@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@color/homeBackgroundColor</item>
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
     <style name="Theme.FlexiBill" parent="Base.Theme.FlexiBill" />
+    <!-- Theme for HomeActivity -->
+    <style name="Theme.JalashrayResort.HomeActivity" parent="Base.Theme.FlexiBill">
+        <item name="android:windowBackground">@color/homeBackgroundColor</item>
+    </style>
 </resources>
