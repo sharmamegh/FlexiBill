@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "562919896555",
+    "project_id": "flexibill-411b7",
+    "storage_bucket": "flexibill-411b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562919896555:android:e622db784867f23a4e95ae",
+        "android_client_info": {
+          "package_name": "com.servicesuite.flexibill"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkzAziCC3U-D76DVqfraUfGVgcT4pZNhs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

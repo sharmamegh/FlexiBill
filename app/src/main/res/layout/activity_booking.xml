@@ -1,0 +1,58 @@
+<!-- activity_booking.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".BookingActivity">
+
+    <EditText
+        android:id="@+id/et_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select Date"
+        android:focusable="false"
+        android:clickable="true"
+        android:inputType="none"/>
+
+    <EditText
+        android:id="@+id/et_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Time"
+        android:focusable="false"
+        android:clickable="true"
+        android:inputType="none"/>
+
+    <EditText
+        android:id="@+id/et_people"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Number of People"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/btn_check_availability"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check Availability"/>
+
+    <TextView
+        android:id="@+id/loading_text"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="Loading..."
+        android:layout_marginBottom="20dp"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_halls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+</LinearLayout>
