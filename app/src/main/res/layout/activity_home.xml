@@ -9,21 +9,34 @@
 
     <Button
         android:id="@+id/booking"
-        android:text="Booking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_marginBottom="300dp"
+        android:ems="8"
+        android:backgroundTint="@color/buttonColor"
+        android:text="Booking"
+        android:textColor="#303F9F"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/logout_button"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <Button
-        android:text="Logout"
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/buttonColor"
+        android:text="Logout"
+        android:textColor="#303F9F"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/booking"/>
+        app:layout_constraintTop_toBottomOf="@+id/booking" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@
         android:id="@+id/hall_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#8C9EFF"
         android:textSize="18sp"
         android:textStyle="bold"/>
 
@@ -16,5 +17,7 @@
         android:id="@+id/hall_capacity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"/>
+        android:textColor="#8C9EFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 </LinearLayout>

@@ -36,7 +36,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Map<String, Object> pkg = packages.get(position);
         holder.packageName.setText((String) pkg.get("name"));
-        holder.packagePrice.setText("Rs. " + pkg.get("price").toString());
+        holder.packagePrice.setText("₹ " + pkg.get("price") + " per person");
 
         holder.radioButton.setChecked(position == selectedPosition);
         holder.radioButton.setOnClickListener(v -> {

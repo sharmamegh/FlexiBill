@@ -5,38 +5,81 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:padding="16dp"
     tools:context=".BookingActivity">
 
     <EditText
         android:id="@+id/et_date"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Select Date"
-        android:focusable="false"
+        android:layout_margin="5dp"
+        android:background="@drawable/contrast_input"
         android:clickable="true"
-        android:inputType="none"/>
+        android:ems="14"
+        android:importantForAutofill="no"
+        android:padding="5dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColorHint="@color/primaryBackgroundColor"
+        android:textAlignment="center"
+        android:focusable="false"
+        android:hint="Select Date"
+        android:inputType="date"
+        android:minHeight="48dp"
+        android:textColor="@color/primaryBackgroundColor" />
 
     <EditText
         android:id="@+id/et_time"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter Time"
-        android:focusable="false"
+        android:layout_margin="5dp"
+        android:background="@drawable/contrast_input"
         android:clickable="true"
-        android:inputType="none"/>
+        android:ems="14"
+        android:importantForAutofill="no"
+        android:padding="5dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColorHint="@color/primaryBackgroundColor"
+        android:textColor="@color/primaryBackgroundColor"
+        android:textAlignment="center"
+        android:focusable="false"
+        android:hint="Enter Time"
+        android:inputType="none"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/et_people"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/contrast_input"
+        android:ems="14"
+        android:importantForAutofill="no"
+        android:padding="5dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColorHint="@color/primaryBackgroundColor"
+        android:textColor="@color/primaryBackgroundColor"
+        android:textAlignment="center"
         android:hint="Number of People"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:minHeight="48dp" />
 
     <Button
         android:id="@+id/btn_check_availability"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/buttonColor"
+        android:ems="10"
+        android:padding="5dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/primaryBackgroundColor"
+        android:textAlignment="center"
         android:text="Check Availability"/>
 
     <TextView
@@ -51,8 +94,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_halls"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp" />
 
 </LinearLayout>

@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:padding="16dp">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:contentDescription="@string/app_name">
 
         <LinearLayout
             android:id="@+id/items_container"
@@ -19,13 +21,23 @@
 
     <Button
         android:id="@+id/add_item_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:backgroundTint="@color/buttonColor"
+        android:textColor="@color/primaryBackgroundColor"
+        android:textSize="16sp"
         android:text="Add Item" />
 
     <Button
         android:id="@+id/book_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ems="8"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/buttonColor"
+        android:textColor="@color/primaryBackgroundColor"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:text="Book" />
 </LinearLayout>

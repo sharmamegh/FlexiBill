@@ -2,11 +2,21 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimary">#8B4513</color> <!-- SaddleBrown -->
-    <color name="colorPrimaryDark">#5C3317</color> <!-- Darker Brown -->
-    <color name="colorAccent">#D2B48C</color> <!-- Tan -->
-    <color name="backgroundColor">#3E2723</color> <!-- Dark Chocolate -->
-    <color name="homeBackgroundColor">#4E342E</color> <!-- Chocolate -->
-    <color name="cardBackgroundColor">#795548</color> <!-- Brown -->
-    <color name="cardTextColor">#FFCCBC</color> <!-- Piggy Bank -->
+    <color name="primaryBackgroundColor">#2A181E</color> <!-- SealBrown -->
+    <color name="colorPrimary">#8C9EFF</color> <!-- Light Slate Blue -->
+    <color name="colorPrimaryDark">#8C9EFF</color> <!-- Light Slate Blue -->
+    <color name="colorAccent">#8B4513</color> <!-- SaddleBrown -->
+    <color name="buttonColor">#D2B48C</color> <!-- Button Color -->
+    <color name="backgroundColor">#2A181E</color> <!-- SealBrown -->
+    <color name="homeBackgroundColor">#2A181E</color> <!-- SealBrown -->
+    <color name="cardBackgroundColor">#3E2723</color> <!-- Dark Chocolate -->
+    <color name="cardTextColor">#8C9EFF</color> <!-- Light Slate Blue -->
+
+    <!-- <color name="colorPrimary">#8B4513</color> - SaddleBrown
+         <color name="colorPrimaryDark">#5C3317</color> - Darker Brown
+         <color name="colorAccent">#D2B48C</color> - Tan
+         <color name="backgroundColor">#3E2723</color> - Dark Chocolate
+         <color name="homeBackgroundColor">#4E342E</color> - Chocolate
+         <color name="cardTextColor">#FFCCBC</color> - Piggy Bank -->
+
 </resources>

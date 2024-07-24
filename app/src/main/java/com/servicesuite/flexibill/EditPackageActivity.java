@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +19,8 @@ import java.util.Map;
 public class EditPackageActivity extends AppCompatActivity {
 
     private LinearLayout itemsContainer;
-    private Button addItemButton;
-    private Button bookButton;
     private Map<String, Object> selectedPackage;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,8 +28,8 @@ public class EditPackageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_package);
 
         itemsContainer = findViewById(R.id.items_container);
-        addItemButton = findViewById(R.id.add_item_button);
-        bookButton = findViewById(R.id.book_button);
+        Button addItemButton = findViewById(R.id.add_item_button);
+        Button bookButton = findViewById(R.id.book_button);
 
         selectedPackage = (Map<String, Object>) getIntent().getSerializableExtra("selectedPackage");
 

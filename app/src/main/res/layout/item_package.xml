@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:padding="16dp">
 
     <LinearLayout
@@ -21,13 +22,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Package Name"
+            android:textColor="#8C9EFF"
+            android:textStyle="bold"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/package_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rs. 0"
+            android:text="₹ 0"
+            android:textColor="#8C9EFF"
+            android:textStyle="bold"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -35,6 +40,11 @@
         android:id="@+id/show_more_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:backgroundTint="@color/buttonColor"
+        android:textColor="@color/primaryBackgroundColor"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:text="Show More" />
 
     <LinearLayout
