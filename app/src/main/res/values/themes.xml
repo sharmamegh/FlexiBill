@@ -16,7 +16,10 @@
 
     <style name="Theme.FlexiBill" parent="Base.Theme.FlexiBill" />
     <!-- Theme for HomeActivity -->
-    <style name="Theme.JalashrayResort.HomeActivity" parent="Base.Theme.FlexiBill">
+    <style name="Theme.FlexiBill.HomeActivity" parent="Base.Theme.FlexiBill">
         <item name="android:windowBackground">@drawable/stitch_pattern_edited</item>
+    </style>
+    <!-- Theme for BookingConfirmationActivity -->
+    <style name="Theme.FlexiBill.BookingConf" parent="Theme.Material3.DayNight.NoActionBar">
     </style>
 </resources>

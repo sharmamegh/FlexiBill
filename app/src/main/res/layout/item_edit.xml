@@ -18,7 +18,8 @@
         android:hint="@string/item_name"
         android:textStyle="bold"
         android:minHeight="48dp"
-        android:textColorHint="#BCAAA4" />
+        android:textColorHint="#BCAAA4"
+        android:textColor="#BCAAA4" />
 
     <EditText
         android:id="@+id/item_quantity"
@@ -33,7 +34,8 @@
         android:inputType="number"
         android:minHeight="48dp"
         android:minWidth="48dp"
-        android:textColorHint="#BCAAA4" />
+        android:textColorHint="#BCAAA4"
+        android:textColor="#BCAAA4" />
 
     <Button
         android:id="@+id/remove_button"
