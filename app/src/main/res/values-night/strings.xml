@@ -2,4 +2,5 @@
 <resources>
     <string name="flexibill_logo">FlexiBill Logo</string>
     <string name="enter_button">Enter button</string>
+    <string name="default_web_client_id">584607992414-g1792fafvkde2i26s0p6jv7amdk7tudn.apps.googleusercontent.com</string>
 </resources>

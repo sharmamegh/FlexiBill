@@ -10,20 +10,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,8 +28,6 @@ import java.util.Map;
 public class BookingActivity extends AppCompatActivity implements BanquetHallAdapter.OnHallClickListener {
 
     private EditText etDate, etTime, etPeople;
-    private Button btnCheckAvailability;
-    private RecyclerView rvHalls;
     private TextView loadingText;
 
     private FirebaseFirestore db;
@@ -49,8 +42,8 @@ public class BookingActivity extends AppCompatActivity implements BanquetHallAda
         etDate = findViewById(R.id.et_date);
         etTime = findViewById(R.id.et_time);
         etPeople = findViewById(R.id.et_people);
-        btnCheckAvailability = findViewById(R.id.btn_check_availability);
-        rvHalls = findViewById(R.id.rv_halls);
+        Button btnCheckAvailability = findViewById(R.id.btn_check_availability);
+        RecyclerView rvHalls = findViewById(R.id.rv_halls);
         loadingText = findViewById(R.id.loading_text);
 
         db = FirebaseFirestore.getInstance();
@@ -59,26 +52,11 @@ public class BookingActivity extends AppCompatActivity implements BanquetHallAda
         hallAdapter = new BanquetHallAdapter(hallList, this);
         rvHalls.setAdapter(hallAdapter);
 
-        etDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog();
-            }
-        });
+        etDate.setOnClickListener(v -> showDatePickerDialog());
 
-        etTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showTimePickerDialog();
-            }
-        });
+        etTime.setOnClickListener(v -> showTimePickerDialog());
 
-        btnCheckAvailability.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAvailability();
-            }
-        });
+        btnCheckAvailability.setOnClickListener(v -> checkAvailability());
     }
 
     private void showDatePickerDialog() {
@@ -131,20 +109,17 @@ public class BookingActivity extends AppCompatActivity implements BanquetHallAda
         db.collection("BanquetHalls")
                 .whereGreaterThanOrEqualTo("capacity", people)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        loadingText.setVisibility(View.GONE);
-                        if (task.isSuccessful()) {
-                            hallList.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                hallList.add(document.getData());
-                            }
-                            hallAdapter.notifyDataSetChanged();
-                        } else {
-                            Log.w("BookingActivity", "Error getting documents.", task.getException());
-                            Toast.makeText(BookingActivity.this, "Error getting data", Toast.LENGTH_SHORT).show();
+                .addOnCompleteListener(task -> {
+                    loadingText.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
+                        hallList.clear();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            hallList.add(document.getData());
                         }
+                        hallAdapter.notifyDataSetChanged();
+                    } else {
+                        Log.w("BookingActivity", "Error getting documents.", task.getException());
+                        Toast.makeText(BookingActivity.this, "Error getting data", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
