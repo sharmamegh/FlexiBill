@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textColor="#8C9EFF"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/hall_capacity"
