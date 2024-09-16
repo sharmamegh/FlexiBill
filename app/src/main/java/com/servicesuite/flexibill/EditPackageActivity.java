@@ -1,98 +1,176 @@
 package com.servicesuite.flexibill;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditPackageActivity extends AppCompatActivity {
+public class EditPackageActivity extends AppCompatActivity implements PackageItemAdapter.OnItemInteractionListener {
 
-    private LinearLayout itemsContainer;
-    private Map<String, Object> selectedPackage;
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private EditText etPackageName, etPrice;
+    private RecyclerView rvPackageItems;
+    private Button btnAddItem, btnSavePackage;
+    private PackageItemAdapter packageItemAdapter;
+//    private TextView tvNoItems;
+    private Map<String, Integer> items = new HashMap<>();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String packageId;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_package);
 
-        itemsContainer = findViewById(R.id.items_container);
-        Button addItemButton = findViewById(R.id.add_item_button);
-        Button bookButton = findViewById(R.id.book_button);
+        etPackageName = findViewById(R.id.etPackageName);
+        etPrice = findViewById(R.id.etPrice);
+        rvPackageItems = findViewById(R.id.rvPackageItems);
+        btnAddItem = findViewById(R.id.btnAddItem);
+        btnSavePackage = findViewById(R.id.btnSavePackage);
+//        tvNoItems = findViewById(R.id.tvNoItems);
 
-        selectedPackage = (Map<String, Object>) getIntent().getSerializableExtra("selectedPackage");
+        packageItemAdapter = new PackageItemAdapter(items, this, this);
+        rvPackageItems.setLayoutManager(new LinearLayoutManager(this));
+        rvPackageItems.setAdapter(packageItemAdapter);
 
-        displayPackageItems();
+        // Check if we're editing an existing package
+        packageId = getIntent().getStringExtra("packageId");
+        if (packageId != null) {
+            loadPackage(packageId);
+        }
 
-        addItemButton.setOnClickListener(v -> addItemView());
+        btnAddItem.setOnClickListener(v -> showAddItemDialog());
 
-        bookButton.setOnClickListener(v -> {
-            Map<String, Object> editedPackage = new HashMap<>();
-
-            editedPackage.put("name", selectedPackage.get("name"));
-            editedPackage.put("price", selectedPackage.get("price"));
-
-            for (int i = 0; i < itemsContainer.getChildCount(); i++) {
-                View itemView = itemsContainer.getChildAt(i);
-                EditText itemName = itemView.findViewById(R.id.item_name);
-                EditText itemQuantity = itemView.findViewById(R.id.item_quantity);
-
-                String name = itemName.getText().toString();
-                int quantity = Integer.parseInt(itemQuantity.getText().toString());
-
-                editedPackage.put(name, quantity);
-            }
-
-            db.collection("Bookings").add(editedPackage)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Intent intent = new Intent(EditPackageActivity.this, BookingConfirmationActivity.class);
-                            intent.putExtra("bookingDetails", (HashMap<String, Object>) editedPackage);
-                            startActivity(intent);
-                        } else {
-                            Log.w("FirestoreError", "Error adding booking.", task.getException());
-                        }
-                    });
-        });
-
+        btnSavePackage.setOnClickListener(v -> savePackage());
     }
 
-    private void displayPackageItems() {
-        for (Map.Entry<String, Object> entry : selectedPackage.entrySet()) {
-            if (!entry.getKey().equals("name") && !entry.getKey().equals("price")) {
-                addItemView(entry.getKey(), entry.getValue().toString());
+    private void showAddItemDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Add Item");
+
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_add_item, null);
+        EditText etItemName = view.findViewById(R.id.etItemName);
+        EditText etQuantity = view.findViewById(R.id.etQuantity);
+
+        builder.setView(view);
+        builder.setPositiveButton("Add", (dialog, which) -> {
+            String itemName = etItemName.getText().toString().trim();
+            String quantityStr = etQuantity.getText().toString().trim();
+
+            if (TextUtils.isEmpty(itemName) || TextUtils.isEmpty(quantityStr)) {
+                Toast.makeText(EditPackageActivity.this, "Please enter item name and quantity", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            int quantity;
+            try {
+                quantity = Integer.parseInt(quantityStr);
+            } catch (NumberFormatException e) {
+                Toast.makeText(EditPackageActivity.this, "Invalid quantity", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            items.put(itemName, quantity);
+            packageItemAdapter.notifyDataSetChanged();
+        });
+
+        builder.setNegativeButton("Cancel", null);
+
+        builder.show();
+    }
+
+    private void loadPackage(String id) {
+        db.collection("packages").document(id).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        Package pkg = task.getResult().toObject(Package.class);
+                        if (pkg != null) {
+                            etPackageName.setText(pkg.getName());
+                            etPrice.setText(String.valueOf(pkg.getPrice()));
+                            items.clear();
+                            items.putAll(pkg.getItems());
+                            packageItemAdapter.notifyDataSetChanged();
+                        }
+                    } else {
+                        Toast.makeText(EditPackageActivity.this, "Error loading package.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
+    public void savePackage() {
+        String name = etPackageName.getText().toString().trim();
+        String priceStr = etPrice.getText().toString().trim();
+
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(priceStr)) {
+            Toast.makeText(EditPackageActivity.this, "Please enter package name and price", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        double price;
+        try {
+            price = Double.parseDouble(priceStr);
+        } catch (NumberFormatException e) {
+            Toast.makeText(EditPackageActivity.this, "Invalid price", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Package pkg = new Package();
+        pkg.setName(name);
+        pkg.setItems(items);
+        pkg.setPrice(price);
+
+        if (packageId != null) {
+            // Update existing package
+            db.collection("packages").document(packageId).set(pkg)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(EditPackageActivity.this, "Package updated.", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK);
+                        finish();
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(EditPackageActivity.this, "Error updating package.", Toast.LENGTH_SHORT).show());
+        } else {
+            // Create new package
+            db.collection("packages").add(pkg)
+                    .addOnSuccessListener(documentReference -> {
+                        Toast.makeText(EditPackageActivity.this, "Package saved.", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK);
+                        finish();
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(EditPackageActivity.this, "Error saving package.", Toast.LENGTH_SHORT).show());
         }
     }
 
-    private void addItemView() {
-        addItemView("", "");
+
+    @Override
+    public void onItemUpdated(String itemName, int quantity) {
+        // Update the item in the map
+        items.put(itemName, quantity);
+        packageItemAdapter.notifyDataSetChanged();
     }
 
-    private void addItemView(String name, String quantity) {
-        View itemView = getLayoutInflater().inflate(R.layout.item_edit, itemsContainer, false);
 
-        EditText itemName = itemView.findViewById(R.id.item_name);
-        EditText itemQuantity = itemView.findViewById(R.id.item_quantity);
-        Button removeButton = itemView.findViewById(R.id.remove_button);
-
-        itemName.setText(name);
-        itemQuantity.setText(quantity);
-
-        removeButton.setOnClickListener(v -> itemsContainer.removeView(itemView));
-
-        itemsContainer.addView(itemView);
+    @Override
+    public void onDeleteItem(String itemName) {
+        // Remove the item from the map
+        items.remove(itemName);
+        packageItemAdapter.notifyDataSetChanged();
     }
 
 }

@@ -51,6 +51,13 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        Button managePackagesButton = findViewById(R.id.manage_packages_button);
+
+        managePackagesButton.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, ManagePackageActivity.class);
+            startActivity(intent);
+        });
+
         Button logoutButton = findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(v -> {
             // Sign out from Firebase Authentication

@@ -21,8 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="8"
-        android:backgroundTint="@color/buttonColor"
         android:text="Booking"
+        android:backgroundTint="@color/buttonColor"
         android:textColor="#303F9F"
         android:textStyle="bold"
         android:textSize="18sp"
@@ -48,6 +48,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="HardcodedText" />
 
+        <Button
+            android:id="@+id/manage_packages_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manage Packages"
+            android:ems="8"
+            android:backgroundTint="@color/buttonColor"
+            android:textColor="#303F9F"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/manage_locations_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

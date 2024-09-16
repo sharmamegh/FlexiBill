@@ -1,43 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:padding="16dp">
 
-    <ScrollView
+    <EditText
+        android:id="@+id/etPackageName"
+        android:layout_width="match_parent"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:hint="Package Name" />
+
+    <EditText
+        android:id="@+id/etPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:hint="Price"
+        android:inputType="numberDecimal" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPackageItems"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:contentDescription="@string/app_name">
-
-        <LinearLayout
-            android:id="@+id/items_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+        android:layout_marginTop="8dp" />
 
     <Button
-        android:id="@+id/add_item_button"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnAddItem"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:backgroundTint="@color/buttonColor"
-        android:textColor="@color/primaryBackgroundColor"
-        android:textSize="16sp"
-        android:text="Add Item" />
-
-    <Button
-        android:id="@+id/book_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="8"
-        android:layout_margin="10dp"
-        android:backgroundTint="@color/buttonColor"
-        android:textColor="@color/primaryBackgroundColor"
-        android:textSize="16sp"
+        android:textColor="#303F9F"
         android:textStyle="bold"
-        android:text="Book" />
+        android:textSize="18sp"
+        android:text="Add Item"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/btnSavePackage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/buttonColor"
+        android:textColor="#303F9F"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="Save Package"
+        android:layout_marginTop="8dp" />
 </LinearLayout>

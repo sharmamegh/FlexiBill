@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="FlexiBill">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-09-15T13:39:49.835421400Z">
+        <DropdownSelection timestamp="2024-09-16T10:08:01.286191700Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="PhysicalDevice" identifier="serial=7045eeb3" />

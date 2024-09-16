@@ -126,12 +126,12 @@ public class BookingActivity extends AppCompatActivity implements BanquetHallAda
 
     @Override
     public void onHallClick(Map<String, Object> hall) {
-        Intent intent = new Intent(BookingActivity.this, PackageSelectionActivity.class);
-        intent.putExtra("hallId", (String) hall.get("id"));
-        intent.putExtra("hallName", (String) hall.get("name"));
-        intent.putExtra("date", etDate.getText().toString());
-        intent.putExtra("time", etTime.getText().toString());
-        intent.putExtra("people", Integer.parseInt(etPeople.getText().toString()));
-        startActivity(intent);
+//        Intent intent = new Intent(BookingActivity.this, PackageSelectionActivity.class);
+//        intent.putExtra("hallId", (String) hall.get("id"));
+//        intent.putExtra("hallName", (String) hall.get("name"));
+//        intent.putExtra("date", etDate.getText().toString());
+//        intent.putExtra("time", etTime.getText().toString());
+//        intent.putExtra("people", Integer.parseInt(etPeople.getText().toString()));
+//        startActivity(intent);
     }
 }
