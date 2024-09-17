@@ -8,9 +8,7 @@ import android.widget.TextView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,12 +65,9 @@ public class BookingActivity extends AppCompatActivity implements BanquetHallAda
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 BookingActivity.this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
-                        etDate.setText(selectedDate);
-                    }
+                (view, year1, month1, dayOfMonth) -> {
+                    String selectedDate = dayOfMonth + "/" + (month1 + 1) + "/" + year1;
+                    etDate.setText(selectedDate);
                 },
                 year, month, day
         );
@@ -86,12 +81,9 @@ public class BookingActivity extends AppCompatActivity implements BanquetHallAda
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(
                 BookingActivity.this,
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        String selectedTime = hourOfDay + ":" + (minute < 10 ? "0" + minute : minute);
-                        etTime.setText(selectedTime);
-                    }
+                (view, hourOfDay, minute1) -> {
+                    String selectedTime = hourOfDay + ":" + (minute1 < 10 ? "0" + minute1 : minute1);
+                    etTime.setText(selectedTime);
                 },
                 hour, minute, true
         );

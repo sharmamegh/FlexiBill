@@ -1,5 +1,6 @@
 package com.servicesuite.flexibill;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class BusinessSetupActivity extends AppCompatActivity {
     private EditText userNameInput, businessNameInput;
     private ImageView logoImageView, signatureImageView;
     private Uri logoUri, signatureUri;
+    private ProgressDialog progressDialog;
     private FirebaseUser user;
 
     private static final int PICK_LOGO_REQUEST = 1;
@@ -44,6 +46,10 @@ public class BusinessSetupActivity extends AppCompatActivity {
             return insets;
         });
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Processing...");
+        progressDialog.setCancelable(false);
+
         userNameInput = findViewById(R.id.user_name_input);
         businessNameInput = findViewById(R.id.business_name_input);
         logoImageView = findViewById(R.id.logo_image_view);
@@ -55,6 +61,7 @@ public class BusinessSetupActivity extends AppCompatActivity {
         findViewById(R.id.select_signature_button).setOnClickListener(v -> pickImage(PICK_SIGNATURE_REQUEST));
 
         findViewById(R.id.save_button).setOnClickListener(v -> {
+            showProgressDialog();
             String userName = userNameInput.getText().toString().trim();
             String businessName = businessNameInput.getText().toString().trim();
 
@@ -110,9 +117,17 @@ public class BusinessSetupActivity extends AppCompatActivity {
                                                 // Now save business details to Firestore
                                                 saveBusinessDetails(userName, businessName, logoDownloadUrl.toString(), signatureDownloadUrl.toString());
                                             }))
-                                    .addOnFailureListener(e -> Log.w("BusinessSetup", "Error uploading signature", e));
+                                    .addOnFailureListener(e -> {
+                                        hideProgressDialog();
+                                        Log.w("BusinessSetup", "Error uploading signature", e);
+                                        Toast.makeText(this, "Signature upload failed. Please try again.", Toast.LENGTH_LONG).show();
+                                    });
                         }))
-                .addOnFailureListener(e -> Log.w("BusinessSetup", "Error uploading logo", e));
+                .addOnFailureListener(e -> {
+                    hideProgressDialog();
+                    Log.w("BusinessSetup", "Error uploading logo", e);
+                    Toast.makeText(this, "Logo upload failed. Please try again.", Toast.LENGTH_LONG).show();
+                });
     }
 
 
@@ -137,6 +152,20 @@ public class BusinessSetupActivity extends AppCompatActivity {
                             startActivity(new Intent(BusinessSetupActivity.this, HomeActivity.class));
                             finish();
                         }))
-                .addOnFailureListener(e -> Log.w("BusinessSetup", "Error saving business details", e));
+                .addOnFailureListener(e -> {
+                    hideProgressDialog();
+                    Log.w("BusinessSetup", "Error saving business details", e);
+                    Toast.makeText(this, "Error saving business details. Please try again.", Toast.LENGTH_LONG).show();
+                });
+    }
+
+    private void showProgressDialog() {
+        progressDialog.show();
+    }
+
+    private void hideProgressDialog() {
+        if (progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 }
