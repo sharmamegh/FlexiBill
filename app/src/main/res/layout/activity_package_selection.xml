@@ -1,29 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    tools:context=".PackageSelectionActivity">
+    android:padding="16dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <Button
-        android:id="@+id/proceed_button"
+    <TextView
+        android:id="@+id/select_package_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        android:ems="12"
-        android:backgroundTint="@color/buttonColor"
-        android:textColor="@color/primaryBackgroundColor"
-        android:textSize="16sp"
+        android:text="Select a Package"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:text="Proceed to Booking" />
+        android:layout_gravity="center"
+        android:paddingBottom="16dp" />
+
+    <!-- This container will hold dynamically added buttons for the packages -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/package_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </ScrollView>
 
 </LinearLayout>
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical"-->
+<!--    android:gravity="center_horizontal"-->
+<!--    tools:context=".PackageSelectionActivity">-->
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recycler_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/proceed_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:ems="12"-->
+<!--        android:backgroundTint="@color/buttonColor"-->
+<!--        android:textColor="@color/primaryBackgroundColor"-->
+<!--        android:textSize="16sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:text="Proceed to Booking" />-->
+
+<!--</LinearLayout>-->

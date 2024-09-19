@@ -13,6 +13,11 @@
     <color name="cardBackgroundColor">#3E2723</color> <!-- Dark Chocolate -->
     <color name="cardTextColor">#8C9EFF</color> <!-- Light Slate Blue -->
 
+    <color name="primary_text_color">#212121</color>
+    <color name="secondary_text_color">#757575</color>
+    <color name="tertiary_text_color">#9E9E9E</color>
+    <color name="item_background_color">#FFFFFF</color>
+
     <!-- <color name="colorPrimary">#8B4513</color> - SaddleBrown
          <color name="colorPrimaryDark">#5C3317</color> - Darker Brown
          <color name="colorAccent">#D2B48C</color> - Tan

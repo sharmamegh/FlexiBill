@@ -49,6 +49,30 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        Button manageLocationsButton = findViewById(R.id.manage_locations_button);
+
+        // Set the button click listener
+        manageLocationsButton.setOnClickListener(v -> {
+            // Navigate to LocationActivity
+            Intent intent = new Intent(HomeActivity.this, LocationActivity.class);
+            startActivity(intent);
+        });
+
+        Button managePackagesButton = findViewById(R.id.manage_packages_button);
+
+        managePackagesButton.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, ManagePackageActivity.class);
+            startActivity(intent);
+        });
+
+        Button manageMenuButton = findViewById(R.id.manage_menu_button);
+
+        manageMenuButton.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, ManageMenuActivity.class);
+            startActivity(intent);
+        });
+
+
         Button logoutButton = findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(v -> {
             // Sign out from Firebase Authentication

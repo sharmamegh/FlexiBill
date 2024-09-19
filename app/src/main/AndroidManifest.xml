@@ -22,6 +22,21 @@
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".BookingPackageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PackageItemSelectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManagePackageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LocationActivity"
+            android:exported="false" />
+        <activity
             android:name=".BusinessSetupActivity"
             android:exported="false" />
         <activity

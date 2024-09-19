@@ -7,5 +7,7 @@
     <string name="username">Username</string>
     <string name="item_name">Item Name</string>
     <string name="quantity">Quantity</string>
+    <string name="edit_location">Edit Location</string>
+    <string name="delete_location">Delete Location</string>
     <string name="default_web_client_id">584607992414-g1792fafvkde2i26s0p6jv7amdk7tudn.apps.googleusercontent.com</string>
 </resources>

@@ -3,21 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="@color/white">
 
     <TextView
-        android:id="@+id/hall_name"
+        android:id="@+id/tvCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#8C9EFF"
+        android:textColor="@color/black"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:paddingBottom="8dp"/>
 
-    <TextView
-        android:id="@+id/hall_capacity"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/llSpinners"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#8C9EFF"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:orientation="vertical"/>
+
 </LinearLayout>
