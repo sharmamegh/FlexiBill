@@ -19,6 +19,15 @@
         android:theme="@style/Theme.FlexiBill"
         tools:targetApi="31">
         <activity
+            android:name=".BookingPackageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PackageItemSelectionActivity"
+            android:exported="false" />
+        <activity
             android:name=".ManagePackageActivity"
             android:exported="false" />
         <activity

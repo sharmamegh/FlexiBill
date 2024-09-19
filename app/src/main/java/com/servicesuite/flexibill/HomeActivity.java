@@ -58,6 +58,14 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        Button manageMenuButton = findViewById(R.id.manage_menu_button);
+
+        manageMenuButton.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, ManageMenuActivity.class);
+            startActivity(intent);
+        });
+
+
         Button logoutButton = findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(v -> {
             // Sign out from Firebase Authentication

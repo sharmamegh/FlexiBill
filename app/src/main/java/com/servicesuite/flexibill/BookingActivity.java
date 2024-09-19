@@ -4,12 +4,12 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -23,16 +23,15 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
-public class BookingActivity extends AppCompatActivity implements BanquetHallAdapter.OnHallClickListener {
+public class BookingActivity extends AppCompatActivity implements LocationAdapter.OnLocationClickListener {
 
     private EditText etDate, etTime, etPeople;
     private TextView loadingText;
 
     private FirebaseFirestore db;
-    private List<Map<String, Object>> hallList = new ArrayList<>();
-    private BanquetHallAdapter hallAdapter;
+    private List<Location> locationList = new ArrayList<>();
+    private LocationAdapter locationAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +42,37 @@ public class BookingActivity extends AppCompatActivity implements BanquetHallAda
         etTime = findViewById(R.id.et_time);
         etPeople = findViewById(R.id.et_people);
         Button btnCheckAvailability = findViewById(R.id.btn_check_availability);
-        RecyclerView rvHalls = findViewById(R.id.rv_halls);
+        RecyclerView rvLocations = findViewById(R.id.rv_locations);
         loadingText = findViewById(R.id.loading_text);
 
         db = FirebaseFirestore.getInstance();
 
-        rvHalls.setLayoutManager(new LinearLayoutManager(this));
-        hallAdapter = new BanquetHallAdapter(hallList, this);
-        rvHalls.setAdapter(hallAdapter);
+        rvLocations.setLayoutManager(new LinearLayoutManager(this));
+        locationAdapter = new LocationAdapter(locationList, new LocationAdapter.OnLocationClickListener() {
+            @Override
+            public void onLocationClick(Location location) {
+                // Navigate to package selection with location and booking details
+                Intent intent = new Intent(BookingActivity.this, PackageSelectionActivity.class);
+                intent.putExtra("locationId", location.getId());
+                intent.putExtra("locationName", location.getName());
+                intent.putExtra("date", etDate.getText().toString());
+                intent.putExtra("time", etTime.getText().toString());
+                intent.putExtra("people", Integer.parseInt(etPeople.getText().toString()));
+                startActivity(intent);
+            }
+
+            @Override
+            public void onEditClick(Location location) {
+                // Optional: Handle edit if needed (for future extensions)
+            }
+
+            @Override
+            public void onDeleteClick(Location location) {
+                // Optional: Handle delete if needed (for future extensions)
+            }
+        }, false); // Hide edit and delete buttons
+
+        rvLocations.setAdapter(locationAdapter);
 
         etDate.setOnClickListener(v -> showDatePickerDialog());
 
@@ -67,12 +89,9 @@ public class BookingActivity extends AppCompatActivity implements BanquetHallAda
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 BookingActivity.this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
-                        etDate.setText(selectedDate);
-                    }
+                (view, year1, month1, dayOfMonth) -> {
+                    String selectedDate = dayOfMonth + "/" + (month1 + 1) + "/" + year1;
+                    etDate.setText(selectedDate);
                 },
                 year, month, day
         );
@@ -86,12 +105,9 @@ public class BookingActivity extends AppCompatActivity implements BanquetHallAda
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(
                 BookingActivity.this,
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        String selectedTime = hourOfDay + ":" + (minute < 10 ? "0" + minute : minute);
-                        etTime.setText(selectedTime);
-                    }
+                (view, hourOfDay, minute1) -> {
+                    String selectedTime = hourOfDay + ":" + (minute1 < 10 ? "0" + minute1 : minute1);
+                    etTime.setText(selectedTime);
                 },
                 hour, minute, true
         );
@@ -105,18 +121,20 @@ public class BookingActivity extends AppCompatActivity implements BanquetHallAda
 
         loadingText.setVisibility(View.VISIBLE);
 
-        // Fetch available halls from Firestore
-        db.collection("BanquetHalls")
+        // Fetch available locations from Firestore
+        db.collection("locations")
                 .whereGreaterThanOrEqualTo("capacity", people)
                 .get()
                 .addOnCompleteListener(task -> {
                     loadingText.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
-                        hallList.clear();
+                        locationList.clear();
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            hallList.add(document.getData());
+                            Location location = document.toObject(Location.class);
+                            location.setId(document.getId());
+                            locationList.add(location);
                         }
-                        hallAdapter.notifyDataSetChanged();
+                        locationAdapter.notifyDataSetChanged();
                     } else {
                         Log.w("BookingActivity", "Error getting documents.", task.getException());
                         Toast.makeText(BookingActivity.this, "Error getting data", Toast.LENGTH_SHORT).show();
@@ -125,13 +143,25 @@ public class BookingActivity extends AppCompatActivity implements BanquetHallAda
     }
 
     @Override
-    public void onHallClick(Map<String, Object> hall) {
+    public void onLocationClick(Location location) {
+        // Navigate to package selection or other screens with location data
 //        Intent intent = new Intent(BookingActivity.this, PackageSelectionActivity.class);
-//        intent.putExtra("hallId", (String) hall.get("id"));
-//        intent.putExtra("hallName", (String) hall.get("name"));
+//        intent.putExtra("locationId", location.getId());
+//        intent.putExtra("locationName", location.getName());
 //        intent.putExtra("date", etDate.getText().toString());
 //        intent.putExtra("time", etTime.getText().toString());
 //        intent.putExtra("people", Integer.parseInt(etPeople.getText().toString()));
 //        startActivity(intent);
+        Toast.makeText(this,"Selected a location",Toast.LENGTH_SHORT);
     }
+    @Override
+    public void onEditClick(Location location) {
+        // No action needed for BookingActivity
+    }
+    @Override
+    public void onDeleteClick(Location location) {
+        // No action needed for BookingActivity
+    }
+
+
 }

@@ -49,7 +49,12 @@ public class LocationActivity extends AppCompatActivity {
 
         // Set up RecyclerView
         locationList = new ArrayList<>();
-        locationAdapter = new LocationAdapter(locationList, new LocationAdapter.OnItemClickListener() {
+        locationAdapter = new LocationAdapter(locationList, new LocationAdapter.OnLocationClickListener() {
+            @Override
+            public void onLocationClick(Location location) {
+                // Handle location click for viewing details or booking
+            }
+
             @Override
             public void onEditClick(Location location) {
                 showAddLocationDialog(location);
@@ -59,7 +64,10 @@ public class LocationActivity extends AppCompatActivity {
             public void onDeleteClick(Location location) {
                 deleteLocation(location);
             }
-        });
+        }, true); // Show edit and delete buttons
+
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(locationAdapter);
 
@@ -74,6 +82,28 @@ public class LocationActivity extends AppCompatActivity {
             }
         });
     }
+    private void showLocationOptionsDialog(final Location location) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(LocationActivity.this);
+        builder.setTitle("Location Options")
+                .setItems(new CharSequence[]{"Edit", "Delete", "Cancel"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0: // Edit
+                                showAddLocationDialog(location);
+                                break;
+                            case 1: // Delete
+                                deleteLocation(location);
+                                break;
+                            case 2: // Cancel
+                                dialog.dismiss();
+                                break;
+                        }
+                    }
+                })
+                .show();
+    }
+
 
     private void fetchLocations() {
         db.collection("locations").addSnapshotListener(new EventListener<QuerySnapshot>() {
