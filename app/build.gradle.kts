@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.play.services.auth)
     implementation(libs.firebase.storage)
+    implementation(libs.glide)
     implementation(libs.firebase.auth.v2300)
     implementation(libs.firebase.firestore.v2510)
     implementation(libs.recyclerview)

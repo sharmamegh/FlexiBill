@@ -61,7 +61,6 @@ public class BusinessSetupActivity extends AppCompatActivity {
         findViewById(R.id.select_signature_button).setOnClickListener(v -> pickImage(PICK_SIGNATURE_REQUEST));
 
         findViewById(R.id.save_button).setOnClickListener(v -> {
-            showProgressDialog();
             String userName = userNameInput.getText().toString().trim();
             String businessName = businessNameInput.getText().toString().trim();
 
@@ -74,6 +73,7 @@ public class BusinessSetupActivity extends AppCompatActivity {
             } else if (signatureUri == null) {
                 Toast.makeText(this, "Please upload a signature", Toast.LENGTH_SHORT).show();
             } else {
+                showProgressDialog();
                 uploadImagesAndSaveDetails(userName, businessName);
             }
         });

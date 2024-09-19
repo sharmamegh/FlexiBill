@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="fire_engine_red">#C1292E</color>
     <color name="primaryBackgroundColor">#2A181E</color> <!-- SealBrown -->
     <color name="colorPrimary">#8C9EFF</color> <!-- Light Slate Blue -->
     <color name="colorPrimaryDark">#8C9EFF</color> <!-- Light Slate Blue -->

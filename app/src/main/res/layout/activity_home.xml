@@ -6,6 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/profile_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/user_profile"
+        android:contentDescription="Profile"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/contrast_color_display"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
     <!-- Element that occupies the rest of the screen and is centered -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainFrame"

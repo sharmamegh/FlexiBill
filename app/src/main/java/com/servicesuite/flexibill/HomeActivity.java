@@ -3,6 +3,7 @@ package com.servicesuite.flexibill;
 import android.os.Bundle;
 import android.content.Intent;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +36,13 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
 
+        ImageView profileIcon = findViewById(R.id.profile_icon);
         Button Booking = findViewById(R.id.booking);
+
+        profileIcon.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        });
 
         Booking.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, BookingActivity.class);
