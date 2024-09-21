@@ -1,12 +1,10 @@
 # FlexiBill
 
-FlexiBill is a fully customizable inventory management and billing application for Android. It provides business administrators with the tools to personalize their business setup, manage orders, and customize service packages, all while maintaining a seamless and user-friendly experience.
+FlexiBill is a customizable billing solution tailored for businesses. It enables business admins to efficiently manage services, orders, and generate detailed invoices. Key features include:
 
-## Key Features:
-- **Business Setup**: Upload business logos, digital signatures, and set up basic business details.
-- **Order Management**: Generate new orders, modify existing ones, and add optional extra services.
-- **Service Customization**: Add or modify service packages and items to suit specific business needs.
-- **Location Management**: Optionally manage services by locations.
-- **Billing**: Generate detailed bills, incorporating the business's logo and signature.
+- **Service Packages**: Admins can configure and select from predefined business packages.
+- **Item and Extra Service Selection**: Specific items within a package can be selected and extra services added for a personalized order.
+- **Invoice Generation**: The final bill is prepared incorporating business details like logo and signature.
+- **Order Management**: Admins can generate, edit, and customize orders with ease.
 
-FlexiBill is designed to make managing and customizing business processes easier, enabling efficient inventory tracking and billing.
+By centralizing key billing features and integrating business personalization, FlexiBill helps businesses streamline operations and enhance customer service.
