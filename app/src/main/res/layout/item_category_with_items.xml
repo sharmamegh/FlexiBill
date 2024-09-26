@@ -5,10 +5,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/item_background"
+    android:background="@color/flexiContrastColor"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    android:elevation="4dp">
+    android:elevation="4dp" >
 
     <!-- Category Name and Delete Button -->
     <LinearLayout
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="8dp" >
 
         <TextView
             android:id="@+id/categoryNameTextView"
@@ -25,16 +25,18 @@
             android:layout_weight="1"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/primary_text_color"/>
+            android:textColor="@color/primary_text_color" />
 
         <ImageButton
             android:id="@+id/deleteCategoryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:minWidth="48dp"
             android:src="@drawable/ic_delete"
             android:background="?attr/selectableItemBackground"
-            android:contentDescription="delete"
-            />
+            android:contentDescription="delete" />
+
     </LinearLayout>
 
     <!-- RecyclerView for displaying items under this category -->
@@ -43,5 +45,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:nestedScrollingEnabled="false"
-        android:layout_marginTop="4dp"/>
+        android:layout_marginTop="4dp" />
+
 </LinearLayout>

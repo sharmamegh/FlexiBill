@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape android:shape="oval"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#27121a"/>
-    <padding android:top="10dp" android:bottom="10dp" android:left="10dp" android:right="10dp" />
+    <solid android:color="@color/school_bus_yellow"/> <!-- #45ffa4 #27121a -->
+    <padding android:top="8dp" android:bottom="8dp" android:left="8dp" android:right="8dp" />
 
 </shape>

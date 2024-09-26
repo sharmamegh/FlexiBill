@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/buttonColor"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/flexiWallColor"
         android:textStyle="bold"
         android:text="Add Category"
         android:layout_marginBottom="16dp" />
@@ -22,18 +22,19 @@
         android:id="@+id/categorySpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:layout_marginBottom="16dp"/>
-
 
     <!-- Item Input Field -->
     <EditText
         android:id="@+id/itemNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@color/flexiContrastColor"
         android:hint="Enter item name"
         android:padding="12dp"
-        android:background="@color/white"
-        android:layout_marginBottom="16dp"/>
+        android:textColorHint="#3949AB" />
 
     <!-- Add Item Button -->
     <Button
@@ -41,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/buttonColor"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/flexiWallColor"
         android:textStyle="bold"
         android:text="Add Item"
         android:layout_marginBottom="16dp"/>

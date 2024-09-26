@@ -9,7 +9,7 @@
         <item name="colorSecondaryVariant">@color/colorAccent</item>
         <item name="colorOnSecondary">@color/cardTextColor</item>
         <item name="android:statusBarColor" >@color/colorPrimaryDark</item>
-        <item name="android:windowBackground">@drawable/stitch_pattern_edited</item>
+        <item name="android:windowBackground">@color/flexiWallColor</item>
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
@@ -17,7 +17,7 @@
     <style name="Theme.FlexiBill" parent="Base.Theme.FlexiBill" />
     <!-- Theme for HomeActivity -->
     <style name="Theme.FlexiBill.HomeActivity" parent="Base.Theme.FlexiBill">
-        <item name="android:windowBackground">@drawable/stitch_pattern_edited</item>
+        <item name="android:windowBackground">@color/flexiWallColor</item>
     </style>
     <!-- Theme for BookingConfirmationActivity -->
     <style name="Theme.FlexiBill.BookingConf" parent="Theme.Material3.DayNight.NoActionBar">
