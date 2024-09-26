@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp"
-    android:background="@color/flexiContrastColor"
+    android:background="@color/school_bus_yellow"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:layout_marginStart="8dp"

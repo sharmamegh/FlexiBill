@@ -38,8 +38,7 @@
             android:exported="false" />
         <activity
             android:name=".BookingConfirmationActivity"
-            android:exported="false"
-            android:theme="@style/Theme.FlexiBill.BookingConf" />
+            android:exported="false" />
         <activity
             android:name=".EditPackageActivity"
             android:exported="false" />

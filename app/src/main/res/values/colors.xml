@@ -4,10 +4,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="fire_engine_red">#C1292E</color>
     <color name="flexiWallColor">#004FAC</color>
+    <color name="school_bus_yellow">#F1D302</color>
     <color name="primary_text_night">#F1D302</color> <!-- School-Bus-Yellow / Gold -->
     <color name="secondary_text_night">#D2B48C</color>
     <color name="tertiary_text_night">#FFFFFF</color>
-    <color name="school_bus_yellow">#F1D302</color>
 
     <color name="flexiContrastColor">#8DD1FF</color>
     <color name="buttonTextColor">#303F9F</color>
