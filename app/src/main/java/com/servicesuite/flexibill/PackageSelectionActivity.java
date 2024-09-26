@@ -12,6 +12,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import org.checkerframework.common.value.qual.IntRangeFromGTENegativeOne;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +23,8 @@ public class PackageSelectionActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private LinearLayout packageContainer;
-
+    private int people;
+    private String location, date, time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,11 @@ public class PackageSelectionActivity extends AppCompatActivity {
         packageContainer = findViewById(R.id.package_container);
         db = FirebaseFirestore.getInstance();
 
+        Intent intent = getIntent();
+        people = intent.getIntExtra("people",0);
+        location = intent.getStringExtra("locationName");
+        date = intent.getStringExtra("date");
+        time = intent.getStringExtra("time");
         // Fetch packages from Firestore
         fetchPackages();
     }
@@ -83,6 +91,12 @@ public class PackageSelectionActivity extends AppCompatActivity {
                             // Pass packageId and itemQuantities to the PackageItemSelectionActivity
                             Intent intent = new Intent(this, PackageItemSelectionActivity.class);
                             intent.putExtra("PACKAGE_ID", packageId);
+
+                            intent.putExtra("location", location);
+                            intent.putExtra("date", date);
+                            intent.putExtra("time", time);
+                            intent.putExtra("people", people);
+
                             intent.putExtra("quantityMap", (Serializable) itemQuantities);
                             startActivity(intent);
                         } else {

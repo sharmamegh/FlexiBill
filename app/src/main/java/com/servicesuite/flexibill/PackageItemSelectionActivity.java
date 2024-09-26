@@ -15,10 +15,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +36,8 @@ public class PackageItemSelectionActivity extends AppCompatActivity {
     private String packageId;
     private Map<String, Integer> itemQuantities;
     private Map<String, List<Spinner>> categorySpinners = new HashMap<>();
+    private int people;
+    private String location, date, time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,12 @@ public class PackageItemSelectionActivity extends AppCompatActivity {
 
         packageId = getIntent().getStringExtra("PACKAGE_ID");
         itemQuantities = (Map<String, Integer>) getIntent().getSerializableExtra("quantityMap");
+
+        Intent intent = getIntent();
+        people = intent.getIntExtra("people",0);
+        location = intent.getStringExtra("location");
+        date = intent.getStringExtra("date");
+        time = intent.getStringExtra("time");
 
         if (packageId != null && itemQuantities != null) {
             Log.d(TAG, "Received packageId: " + packageId);
@@ -105,11 +115,17 @@ public class PackageItemSelectionActivity extends AppCompatActivity {
                                 itemNames.add(itemName);
                             }
                         }
+
+                        // If the category has no items, remove the category view and skip adding spinners
                         if (itemNames.isEmpty()) {
                             Log.d(TAG, "No items found for category: " + category);
+                            // Cast the ViewParent to View and remove it from the parent layout
+                            View categoryView = (View) llSpinners.getParent(); // Get the parent view of llSpinners
+                            llCategories.removeView(categoryView); // Remove the whole category view
+                            return; // Skip adding this category
                         }
 
-                        // Set up spinners
+                        // Set up spinners only if there are items
                         for (int i = 0; i < quantity; i++) {
                             Spinner spinner = new Spinner(this);
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -128,6 +144,7 @@ public class PackageItemSelectionActivity extends AppCompatActivity {
     private void saveItems() {
         Map<String, List<String>> selectedItems = new HashMap<>();
 
+        // Loop through the spinners and collect the selected items for each category
         for (Map.Entry<String, List<Spinner>> entry : categorySpinners.entrySet()) {
             String category = entry.getKey();
             List<Spinner> spinners = entry.getValue();
@@ -135,20 +152,53 @@ public class PackageItemSelectionActivity extends AppCompatActivity {
 
             for (Spinner spinner : spinners) {
                 String selectedItem = (String) spinner.getSelectedItem();
-                if (selectedItem != null) {
+                if (selectedItem != null && !selectedItem.isEmpty()) {  // Check if a valid item is selected
                     items.add(selectedItem);
                 }
             }
 
-            selectedItems.put(category, items);
+            if (!items.isEmpty()) {
+                selectedItems.put(category, items);  // Only add if there are selected items
+            }
         }
 
-        // Save selected items to database or handle them as needed
-        db.collection("packages").document(packageId).update("selectedItems", selectedItems)
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(PackageItemSelectionActivity.this, "Items saved.", Toast.LENGTH_SHORT).show();
-                    finish();
-                })
-                .addOnFailureListener(e -> Toast.makeText(PackageItemSelectionActivity.this, "Error saving items.", Toast.LENGTH_SHORT).show());
+        // Fetch package details from Firestore based on packageId
+        db.collection("packages").document(packageId).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        DocumentSnapshot document = task.getResult();
+                        String packageName = document.getString("name");
+                        Long priceLong = document.getLong("price");
+
+                        if (packageName != null && priceLong != null) { // Ensure name and price exist
+                            int packagePrice = priceLong.intValue();
+
+                            // Prepare booking details to pass to BookingConfirmationActivity
+                            Map<String, Object> bookingDetails = new HashMap<>();
+                            bookingDetails.put("packageId", packageId);
+                            bookingDetails.put("selectedItems", selectedItems);
+                            bookingDetails.put("location", location);
+                            bookingDetails.put("date", date);
+                            bookingDetails.put("time", time);
+                            bookingDetails.put("numberOfPeople", people);
+                            bookingDetails.put("packageName", packageName);
+                            bookingDetails.put("packagePrice", packagePrice);
+
+                            // Create Intent for BookingConfirmationActivity
+                            Intent intent = new Intent(PackageItemSelectionActivity.this, BookingConfirmationActivity.class);
+                            intent.putExtra("bookingDetails", (Serializable) bookingDetails);
+                            startActivity(intent);
+                        } else {
+                            Log.e(TAG, "Package name or price is missing.");
+                            Toast.makeText(PackageItemSelectionActivity.this, "Error fetching package details.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.e(TAG, "Failed to fetch package details", task.getException());
+                        Toast.makeText(PackageItemSelectionActivity.this, "Error fetching package details.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
+
+
+
 }
