@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:backgroundTint="@color/buttonColor"
-        android:textColor="@color/primaryBackgroundColor"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:text="remove" />
 </LinearLayout>

@@ -3,6 +3,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="fire_engine_red">#C1292E</color>
+    <color name="flexiWallColor">#004FAC</color>
+    <color name="primary_text_night">#F1D302</color> <!-- School-Bus-Yellow / Gold -->
+    <color name="secondary_text_night">#D2B48C</color>
+    <color name="tertiary_text_night">#FFFFFF</color>
+    <color name="school_bus_yellow">#F1D302</color>
+
+    <color name="flexiContrastColor">#8DD1FF</color>
+    <color name="buttonTextColor">#303F9F</color>
+
     <color name="primaryBackgroundColor">#2A181E</color> <!-- SealBrown -->
     <color name="colorPrimary">#8C9EFF</color> <!-- Light Slate Blue -->
     <color name="colorPrimaryDark">#8C9EFF</color> <!-- Light Slate Blue -->
@@ -15,7 +24,7 @@
 
     <color name="primary_text_color">#212121</color>
     <color name="secondary_text_color">#757575</color>
-    <color name="tertiary_text_color">#9E9E9E</color>
+    <color name="tertiary_text_color">#D2B48C</color> <!-- #9E9E9E -->
     <color name="item_background_color">#FFFFFF</color>
 
     <!-- <color name="colorPrimary">#8B4513</color> - SaddleBrown

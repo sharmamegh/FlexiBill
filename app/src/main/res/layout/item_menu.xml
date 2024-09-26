@@ -5,12 +5,12 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp"
-    android:background="@drawable/item_background"
+    android:background="@color/flexiContrastColor"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    android:gravity="center_vertical"
-    android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:gravity="center_vertical"
     android:elevation="4dp">
 
     <TextView
@@ -20,12 +20,14 @@
         android:layout_weight="1"
         android:textSize="16sp"
         android:textColor="@color/primary_text_color"
-        android:text="Item Name"/>
+        android:text="Item Name" />
 
     <ImageButton
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         android:src="@drawable/ic_delete"
         android:background="?attr/selectableItemBackground"
         android:contentDescription="delete"
