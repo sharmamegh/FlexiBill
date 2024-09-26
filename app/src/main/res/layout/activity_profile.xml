@@ -52,6 +52,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/businessNameView"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/userNameView"
             tools:ignore="HardcodedText" />
@@ -91,7 +92,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_name_input"
-            tools:ignore="HardcodedText" />
+            tools:ignore="Autofill,HardcodedText" />
 
         <LinearLayout
             android:id="@+id/imageViewFrame"
@@ -115,6 +116,7 @@
                     android:id="@+id/logo_image_view"
                     android:layout_width="180dp"
                     android:layout_height="180dp"
+                    android:background="@color/white"
                     android:layout_margin="4dp"
                     android:contentDescription="Logo"
                     android:src="@mipmap/logo_placeholder"
@@ -147,6 +149,7 @@
                     android:id="@+id/signature_image_view"
                     android:layout_width="180dp"
                     android:layout_height="180dp"
+                    android:background="@color/white"
                     android:layout_margin="4dp"
                     android:contentDescription="Signature"
                     android:src="@mipmap/signature_placeholder"
@@ -205,4 +208,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/wrapperLayout"
         tools:ignore="HardcodedText" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/fire_animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/fire_animation"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

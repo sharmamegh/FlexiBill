@@ -35,6 +35,7 @@ android {
 dependencies {
     implementation(libs.itext)
     implementation(libs.lottie)
+    implementation(libs.lottie.v652)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

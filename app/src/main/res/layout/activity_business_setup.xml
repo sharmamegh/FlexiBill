@@ -28,7 +28,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/business_name_input" />
+        app:layout_constraintBottom_toTopOf="@id/business_name_input"
+        tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/business_name_input"
@@ -36,6 +37,7 @@
         android:layout_height="wrap_content"
         android:hint="Enter your business name"
         android:background="@drawable/contrast_input"
+        android:importantForAutofill="no"
         android:inputType="text"
         android:minHeight="48dp"
         android:ems="15"
@@ -49,7 +51,8 @@
         app:layout_constraintTop_toBottomOf="@id/user_name_input"
         app:layout_constraintBottom_toTopOf="@id/imageViewFrame"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="HardcodedText" />
 
     <LinearLayout
         android:id="@+id/imageViewFrame"
@@ -73,9 +76,11 @@
                 android:id="@+id/logo_image_view"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
+                android:background="@color/white"
                 android:layout_margin="4dp"
                 android:contentDescription="Logo"
-                android:src="@mipmap/logo_placeholder" />
+                android:src="@mipmap/logo_placeholder"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/select_logo_button"
@@ -88,7 +93,8 @@
                 android:textColor="#303F9F"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:text="Select Logo" />
+                android:text="Select Logo"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
 
@@ -103,9 +109,11 @@
                 android:id="@+id/signature_image_view"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
+                android:background="@color/white"
                 android:layout_margin="4dp"
                 android:contentDescription="Signature"
-                android:src="@mipmap/signature_placeholder" />
+                android:src="@mipmap/signature_placeholder"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/select_signature_button"
@@ -118,7 +126,8 @@
                 android:textColor="#303F9F"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:text="Select Signature" />
+                android:text="Select Signature"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
 

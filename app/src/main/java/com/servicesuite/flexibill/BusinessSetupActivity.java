@@ -18,6 +18,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -74,7 +76,7 @@ public class BusinessSetupActivity extends AppCompatActivity {
                 Toast.makeText(this, "Please upload a signature", Toast.LENGTH_SHORT).show();
             } else {
                 showProgressDialog();
-                uploadImagesAndSaveDetails(userName, businessName);
+                checkIfUserDocumentExistsAndProceed(userName, businessName);
             }
         });
 
@@ -92,12 +94,58 @@ public class BusinessSetupActivity extends AppCompatActivity {
             Uri selectedImageUri = data.getData();
             if (requestCode == PICK_LOGO_REQUEST) {
                 logoUri = selectedImageUri;
-                logoImageView.setImageURI(logoUri);  // Display selected logo
+                logoImageView.setImageURI(logoUri);
             } else if (requestCode == PICK_SIGNATURE_REQUEST) {
                 signatureUri = selectedImageUri;
-                signatureImageView.setImageURI(signatureUri);  // Display selected signature
+                signatureImageView.setImageURI(signatureUri);
             }
         }
+    }
+
+    private void checkIfUserDocumentExistsAndProceed(String userName, String businessName) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("users").document(user.getUid());
+
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document != null && document.exists()) {
+                    // User document exists, proceed to upload images and save business details
+                    uploadImagesAndSaveDetails(userName, businessName);
+                } else {
+                    // User document does not exist, create it first
+                    storeUserInFirestore(user, userName, businessName);
+                }
+            } else {
+                hideProgressDialog();
+                Log.w("BusinessSetup", "Failed to check user document", task.getException());
+                Toast.makeText(this, "Failed to check user details. Please try again.", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void storeUserInFirestore(FirebaseUser user, String userName, String businessName) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Prepare the user map
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("uid", user.getUid());
+        userMap.put("email", user.getEmail());
+        userMap.put("businessDetailsComplete", false); // Setup not done yet
+        userMap.put("googleAuthUserName", user.getDisplayName());
+
+        db.collection("users").document(user.getUid())
+                .set(userMap)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("BusinessSetup", "User document created in Firestore.");
+                    // Now proceed to upload images and save business details
+                    uploadImagesAndSaveDetails(userName, businessName);
+                })
+                .addOnFailureListener(e -> {
+                    hideProgressDialog();
+                    Log.w("BusinessSetup", "Error creating user document", e);
+                    Toast.makeText(this, "Error creating user document. Please try again.", Toast.LENGTH_LONG).show();
+                });
     }
 
     private void uploadImagesAndSaveDetails(String userName, String businessName) {
@@ -130,12 +178,9 @@ public class BusinessSetupActivity extends AppCompatActivity {
                 });
     }
 
-
-
     private void saveBusinessDetails(String userName, String businessName, String logoUrl, String signatureUrl) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Prepare the business details map
         Map<String, Object> businessMap = new HashMap<>();
         businessMap.put("userName", userName);
         businessMap.put("businessName", businessName);
@@ -167,5 +212,11 @@ public class BusinessSetupActivity extends AppCompatActivity {
         if (progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        progressDialog.dismiss();
     }
 }
